@@ -1,11 +1,15 @@
 import Banner from "./Banner";
+import Counter from "./Counter";
 import Movies from "./Movies";
+import TodoRedux from "./TodoRedux";
 
 const Home = () => {
   return (
     <>
-      <Banner />
-      <Movies />
+     <Banner />
+     <Movies /> 
+   {/*   <Counter />
+     <TodoRedux /> */}
     </>
   );
 };

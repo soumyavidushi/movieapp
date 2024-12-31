@@ -27,7 +27,7 @@ const Watchlist = () => {
           const baseStyles =
             "flex justify-center items-center h-[3rem] w-[8rem] rounded-lg text-white font-bold mx-4";
           const bgColor = isActive ? "bg-blue-400" : "bg-gray-400/50";
-          return <div onClick={()=>handleFilter(genre)} className={`${baseStyles} ${bgColor}`}>{genre}</div>;
+          return <div key={genre} onClick={()=>handleFilter(genre)} className={`${baseStyles} ${bgColor}`}>{genre}</div>;
         })}
       </div>
     )

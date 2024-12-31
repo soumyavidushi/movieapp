@@ -3,13 +3,23 @@ import Pagination from "./Pagination";
 import MovieCard from "./MovieCard";
 import axios from "axios";
 import { WatchListContext } from "../context/WatchListContext";
+import { useSelector, useDispatch } from "react-redux";
+import { handleNext, handlePrev } from "../redux/paginationSlice";
 
 const Movies = () => {
   // we will be using this static list of movies then we will replace it with actual data fetching logic
   const [movies, setMovies] = useState([]);
-  const [pageNo, setPageNo] = useState(1); 
-  // const {addToWatchList, removeFromWatchList, watchList, setWatchList} = useContext(WatchListContext);
   const {addToWatchList, removeFromWatchList, watchList, setWatchList} = useContext(WatchListContext);
+  const {pageNo} = useSelector((state) => state.pagination);  
+  const dispatch = useDispatch();
+
+  const handleNextPage = () => {
+    dispatch(handleNext());
+  }
+
+  const handlePrevious = () => {
+    dispatch(handlePrev());
+  }
 
   useEffect(() => {
     console.log("use effect fetched data");
@@ -23,17 +33,6 @@ const Movies = () => {
       });
   }, [pageNo]);
 
-  const handleNext = () => {
-    setPageNo(pageNo + 1);
-  };
-  // go back handler
-  const handlePrevious = () => {
-    if (pageNo == 1) {
-      setPageNo(pageNo);
-    } else {
-      setPageNo(pageNo - 1);
-    }
-  };
   return (
     <div>
       <div className="text-2xl font-bold text-center m-5">
@@ -53,7 +52,7 @@ const Movies = () => {
         })}
       </div>
       <Pagination
-        nextPageFn={handleNext}
+        nextPageFn={handleNextPage}
         previosuPageFn={handlePrevious}
         pageNumber={pageNo}
       />
